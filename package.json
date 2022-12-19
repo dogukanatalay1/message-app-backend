@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/dogukanatalay1/message-app-backend/issues"
   },
-  "homepage": "https://github.com/dogukanatalay1/message-app-backend#readme"
+  "homepage": "https://github.com/dogukanatalay1/message-app-backend#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
