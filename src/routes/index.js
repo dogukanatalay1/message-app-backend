@@ -1,1 +1,1 @@
-module.exports.user = require('./user.routes');
+module.exports.chat = require('./chat.routes');

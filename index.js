@@ -15,13 +15,13 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 8080;
 
-app.use(errorHandler);
-
 app.get('/', (req, res) => {
     res.send('welcome');
 });
 
-app.use('/users', routes.user);
+app.use('/chat', routes.chat);
+
+app.use(errorHandler);
 
 const server = http.createServer(app);
 

@@ -1,13 +1,13 @@
-const fetchAll = (model) => {
-    return model.find();
+const fetchAll = async (model) => {
+    return await model.find();
 };
 
-const findById = (model, id) => {
-    return model.findById(id);
+const findById = async(model, id) => {
+    return await model.findById(id);
 };
 
-const create = (model, data) => {
-    return model.create(data);
+const create = async (model, data) => {
+    return await model.create(data);
 };
 
 module.exports = { fetchAll, create, findById };

@@ -1,8 +1,4 @@
-// const userModel = require('../models/User.model.js');
-// const messageModel = require('../models/Message.model.js');
-// const chatModel = require('../models/Chat.model.js');
-
-// const mongoose = require('mongoose');
+const chatController = require('../controllers/chat.controller');
 
 const handleSocketConnections = (io) => {
     io.on('connection', (socket) => {
@@ -14,11 +10,15 @@ const handleSocketConnections = (io) => {
 
         socket.on('chat-message', (msg) => {
             socket.broadcast.emit('chat-message', msg);
-            console.log(msg);
+
+            chatController.createMessage(msg);
         });
+
         socket.on('joined', (name) => {
             socket.broadcast.emit('joined', name);
+            console.log(name, 'joined');
         });
+
         socket.on('leaved', (name) => {
             socket.broadcast.emit('leaved', name);
         });
@@ -26,6 +26,7 @@ const handleSocketConnections = (io) => {
         socket.on('typing', (data) => {
             socket.broadcast.emit('typing', data);
         });
+
         socket.on('stoptyping', () => {
             socket.broadcast.emit('stoptyping');
         });
