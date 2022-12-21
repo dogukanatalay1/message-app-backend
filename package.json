@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "lint": "eslint ./**/*.js",
+    "lint-fix": "eslint ./**/*.js --fix"
   },
+  "contributor": "https://github.com/dogukanatalay1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dogukanatalay1/message-app-backend.git"
@@ -16,5 +20,19 @@
   "bugs": {
     "url": "https://github.com/dogukanatalay1/message-app-backend/issues"
   },
-  "homepage": "https://github.com/dogukanatalay1/message-app-backend#readme"
+  "homepage": "https://github.com/dogukanatalay1/message-app-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.30.0",
+    "express": "^4.18.2",
+    "http-status": "^1.5.3",
+    "httpstatus": "^1.0.0",
+    "mongoose": "^6.8.1",
+    "socket.io": "^4.5.4",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
