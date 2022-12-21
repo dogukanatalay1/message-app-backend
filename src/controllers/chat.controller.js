@@ -5,8 +5,8 @@ const messageModel = require('../models/Message.model');
 const { v4: uuidv4 } = require('uuid');
 const httpStatus = require('http-status');
 
-const createMessage = (msg, next, res) => {
-    console.log(msg);
+const createMessage = async (msg, next, res) => {
+    console.log('msg', msg);
 
     const messageObject = {
         id: uuidv4(),
@@ -14,8 +14,15 @@ const createMessage = (msg, next, res) => {
         user: msg.user,
     };
 
+    console.log('msgobj:', messageObject);
+
     try {
-        const createdMsg = BaseService.create(messageModel, messageObject);
+        const createdMsg = await BaseService.create(
+            messageModel,
+            messageObject
+        );
+
+        console.log('createdmsg:', createdMsg);
 
         if (!createdMsg) {
             return new ApiError(
@@ -54,4 +61,26 @@ const getAllMessages = async (req, res) => {
     }
 };
 
-module.exports = { createMessage, getAllMessages };
+const deleteAllMessages = async (req, res) => {
+    try {
+        const deletedMessages = await BaseService.deleteAll(messageModel);
+
+        console.log(deletedMessages);
+        if (!deletedMessages) {
+            // eslint-disable-next-line max-len
+            // new ApiError('There have been an error!', httpStatus.BAD_REQUEST);
+            res.status(400).json(deletedMessages);
+        }
+
+        ApiDataSuccess.send(
+            'Messages deleted succesfully!',
+            httpStatus[204],
+            res,
+            deletedMessages
+        );
+    } catch (error) {
+        return new ApiError(error.message, httpStatus.INTERNAL_SERVER_ERROR);
+    }
+};
+
+module.exports = { createMessage, getAllMessages, deleteAllMessages };
