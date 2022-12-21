@@ -29,7 +29,8 @@
     "http-status": "^1.5.3",
     "httpstatus": "^1.0.0",
     "mongoose": "^6.8.1",
-    "socket.io": "^4.5.4"
+    "socket.io": "^4.5.4",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

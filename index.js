@@ -3,7 +3,9 @@ const cors = require('cors');
 const errorHandler = require('./src/middlewares/error-handler.middleware');
 const { Server } = require('socket.io');
 const http = require('http');
+const routes = require('./src/routes');
 const app = express();
+const socketController = require('./src/controllers/socket.controller');
 require('dotenv').config();
 
 require('./src/loaders/db-connection');
@@ -19,7 +21,10 @@ app.get('/', (req, res) => {
     res.send('welcome');
 });
 
+app.use('/users', routes.user);
+
 const server = http.createServer(app);
+
 const io = new Server(server, {
     cors: {
         origin: 'http://localhost:8080',
@@ -30,18 +35,7 @@ const io = new Server(server, {
     allowEIO3: true,
 });
 
-io.on('connection', (socket) => {
-    console.log(`User ${socket.id} is connected.`);
-
-    socket.on('message', (data) => {
-        socket.broadcast.emit('message:received', data);
-        console.log(data);
-    });
-
-    socket.on('disconnect', () => {
-        console.log(`User ${socket.id} left.`);
-    });
-});
+socketController.handleSocketConnections(io);
 
 server.listen(PORT, () => {
     console.log(`Chat server is running on ${PORT}`);
